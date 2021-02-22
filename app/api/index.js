@@ -13,7 +13,7 @@ const socketioJwt = require("socketio-jwt");
 
 const io = require("socket.io")(server, {
   cors: {
-    origin: "http://localhost:4200",
+    origin: "https://5000-harlequin-anaconda-3yee5arx.ws-us03.gitpod.io/",
     methods: ["GET", "POST"]
   }
 });
@@ -27,13 +27,12 @@ const io = require("socket.io")(server, {
 app.set('socketio', io);
 
 app.use(cors());
-app.use(express.static("public"));
+app.use(express.static(__dirname + '/../dashboard/dist/dashboard'));
 app.use(bodyParser.json());
 
-app.get("/", async (req, res) => {
-  // TODO: send angular app in a nicer way tan this
-  res.sendFile(__dirname + '/../dashboard/dist/dashboard/index.html');
-});
+// app.get("/", async (req, res) => {
+//   // TODO: send angular app in a nicer way tan this
+// });
 
 app.use("/v1/run", commandRoutes);
 app.use("/v1/auth", authRoutes);
