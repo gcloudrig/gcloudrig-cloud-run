@@ -32,7 +32,7 @@ app.use(bodyParser.json());
 
 app.get("/", async (req, res) => {
   // TODO: send angular app in a nicer way tan this
-  res.sendFile(__dirname + '../dashboard/dist/dashboard/index.html');
+  res.sendFile(__dirname + '/../dashboard/dist/dashboard/index.html');
 });
 
 app.use("/v1/run", commandRoutes);
