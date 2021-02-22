@@ -9,7 +9,7 @@ FROM gitpod/workspace-full
 # be root
 USER root
 
-# update things
+# update all the things
 RUN apt-get update -qqy && apt-get upgrade -qqy
 
 # install google-cloud-sdk
@@ -28,3 +28,7 @@ RUN apt-get -qqy update && apt-get -qqy install \
 
 # and now stop being root
 USER gitpod
+
+# install npm globals
+RUN npm install -g \
+    @angular/cli
