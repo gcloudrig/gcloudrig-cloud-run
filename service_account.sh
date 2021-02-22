@@ -14,10 +14,8 @@ if [ -z "$GOOGLE_CLOUD_PROJECT" ]; then
         echo "ERROR: \$GOOGLE_CLOUD_PROJECT environment variable is not set!"
         exit 1
     else
-        GOOGLE_CLOUD_PROJECT="$gcloud_config_project"
+        GOOGLE_CLOUD_PROJECT=$gcloud_config_project
     fi
-else
-    GOOGLE_CLOUD_PROJECT="$gcloud_config_project"
 fi
 
 # Create a new IAM service account

@@ -31,7 +31,8 @@ app.use(express.static("public"));
 app.use(bodyParser.json());
 
 app.get("/", async (req, res) => {
-  //send angular app
+  // TODO: send angular app
+  res.status(200).send("hello there");
 });
 
 app.use("/v1/run", commandRoutes);
