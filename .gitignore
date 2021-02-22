@@ -1,5 +1,6 @@
 # ignore node libs
-app/node_modules/
+app/api/node_modules/
+app/dashboard/node_modules/
 
 # ignore angular dist
 app/dashboard/dist/

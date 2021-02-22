@@ -1,3 +1,4 @@
 .git
-app/node_modules/
+app/api/node_modules/
+app/dashboard/node_modules/
 service_account.json

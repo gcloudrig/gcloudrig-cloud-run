@@ -29,6 +29,6 @@ RUN apt-get -qqy update && apt-get -qqy install \
 # and now stop being root
 USER gitpod
 
-# install npm globals
+# install angular-cli
 RUN npm install -g \
     @angular/cli

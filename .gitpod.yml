@@ -5,9 +5,13 @@ tasks:
   # always start docker
   - command: sudo docker-up
 
+  # install npm deps
+  - init: |
+      make npm_install \
+        && make build
+
   # main init & run
   - init: |
       gcloud auth login \
-        && ./service_account.sh \
-        && make
+        && ./service_account.sh
     command: make run

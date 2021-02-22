@@ -13,8 +13,7 @@ RUN mkdir -p /usr/local/gcloud \
 # Adding the package path to local
 ENV PATH $PATH:/usr/local/gcloud/google-cloud-sdk/bin
 
-COPY ./api /usr/src/app/api/
-COPY ./service_account.json /secret/
+COPY ./app /usr/src/app/
 COPY ./entrypoint.sh /
 
 # Get tagged copy of gcloudrig
@@ -25,8 +24,9 @@ RUN curl -L https://api.github.com/repos/gcloudrig/gcloudrig/tarball/v0.1.0-beta
 ARG project_id 
 ENV PROJECT_ID=$project_id
 
-WORKDIR /usr/src/app/api
-RUN npm ci --only=production
+WORKDIR /usr/src/app
+RUN npm ci --prefix ./api --only=production; \
+    npm ci --prefix ./dashboard --only=production
 
 EXPOSE 5000/tcp
 CMD [ "sh", "-c", "/entrypoint.sh" ]
