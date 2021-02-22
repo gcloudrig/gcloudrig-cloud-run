@@ -6,7 +6,7 @@ tasks:
   - command: sudo docker-up
 
   # main init & run
-  - init: -|
+  - init: |
       gcloud auth login \
         && ./service_account.sh \
         && make
