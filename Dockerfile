@@ -18,8 +18,8 @@ COPY ./service_account.json /secret/
 COPY ./entrypoint.sh /
 
 # Get tagged copy of gcloudrig
-RUN curl https://github.com/gcloudrig/gcloudrig/archive/v0.1.0-beta.3.tar.gz > /tmp/gcloudrig.tar.gz
-    && tar -C /usr/src/app -xvf /tmp/gcloudrig.tar.gz \
+RUN curl -L https://api.github.com/repos/gcloudrig/gcloudrig/tarball/v0.1.0-beta.3 > /tmp/gcloudrig.tar.gz \
+    && tar -C /usr/src/app -xvf /tmp/gcloudrig.tar.gz --strip-components=1
 
 # Build-time arg for project_id
 ARG project_id 
