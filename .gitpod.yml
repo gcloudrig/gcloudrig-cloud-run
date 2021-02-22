@@ -2,4 +2,7 @@ image:
   file: .gitpod.Dockerfile
 
 tasks:
-  - init: make
+  - init: sudo docker-up
+  - init: gcloud auth login \
+        && gcloud config set project "$GOOGLE_CLOUD_PROJECT"
+
