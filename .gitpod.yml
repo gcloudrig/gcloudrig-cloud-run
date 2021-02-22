@@ -2,7 +2,12 @@ image:
   file: .gitpod.Dockerfile
 
 tasks:
-  - init: sudo docker-up
-  - init: gcloud auth login \
-        && gcloud config set project "$GOOGLE_CLOUD_PROJECT"
+  # always start docker
+  - command: sudo docker-up
 
+  # main init & run
+  - init: -|
+      gcloud auth login \
+        && ./service_account.sh \
+        && make
+    command: make run
