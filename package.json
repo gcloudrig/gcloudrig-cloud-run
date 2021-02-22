@@ -1,0 +1,15 @@
+{
+  "name": "gcloudrig-cloud-run",
+  "version": "0.0.1",
+  "workspaces": [
+    "app/api",
+    "app/dashboard"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gcloudrig/gcloudrig-cloud-run.git"
+  },
+  "bugs": {
+    "url": "https://github.com/gcloudrig/gcloudrig-cloud-run/issues"
+  }
+}
