@@ -1,4 +1,5 @@
 build:
+	npm run build --prefix app/dashboard
 	docker build --build-arg project_id="${GOOGLE_CLOUD_PROJECT}" --tag gcloudrigapi .
 
 run_bash:
