@@ -13,7 +13,7 @@ const socketioJwt = require("socketio-jwt");
 
 const io = require("socket.io")(server, {
   cors: {
-    origin: "https://5000-harlequin-anaconda-3yee5arx.ws-us03.gitpod.io/",
+    origin: "*:*",
     methods: ["GET", "POST"]
   }
 });
