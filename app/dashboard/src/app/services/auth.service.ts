@@ -8,7 +8,7 @@ export interface Bearer {
 }
 
 export interface Validity {
-  status: string;
+  status: boolean;
 }
 
 @Injectable({
@@ -40,8 +40,6 @@ export class AuthService {
   }
 
   public async isLoggedIn(): Promise<boolean> {
-
-
     
     if (
       localStorage.getItem('auth_token') != null &&
@@ -55,12 +53,9 @@ export class AuthService {
         })
       };
 
-      const data = await this.http.get<Validity>('http://localhost:5000/v1/auth/validate', httpOptions).toPromise();
-      if (data.status == 'valid token') {
-        return true;
-      } else {
-        return false;
-      }
+      const res = await this.http.get<Validity>('http://localhost:5000/v1/auth/validate', httpOptions).toPromise();
+      return res.status;
+      
     } else {
       return false;
     }
