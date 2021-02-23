@@ -1,9 +1,14 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map, tap } from 'rxjs/operators';
+import { tap } from 'rxjs/operators';
+import { HttpHeaders } from '@angular/common/http';
 
 export interface Bearer {
   accessToken: string;
+}
+
+export interface Validity {
+  status: string;
 }
 
 @Injectable({
@@ -34,27 +39,31 @@ export class AuthService {
     return localStorage.getItem('auth_token');
   }
 
-  public isLoggedIn() {
+  public async isLoggedIn(): Promise<boolean> {
+
+
+    
     if (
       localStorage.getItem('auth_token') != null &&
       localStorage.getItem('auth_token') != ''
     ) {
-      return true;
-    } else {
-      return false;
-    }
-  }
 
-  isValidToken() {
-    this.http.get('http://localhost:5000/v1/auth/validate').pipe(map(data => {
-      console.log(data);
-      (data);
-      if (data == 'valid token') {
+      const httpOptions = {
+        headers: new HttpHeaders({
+          'Content-Type':  'application/json',
+          Authorization: `Bearer ${this.getToken()}`
+        })
+      };
+
+      const data = await this.http.get<Validity>('http://localhost:5000/v1/auth/validate', httpOptions).toPromise();
+      if (data.status == 'valid token') {
         return true;
       } else {
         return false;
       }
-    }));
+    } else {
+      return false;
+    }
   }
 
   public isLoggedOut() {

@@ -4,9 +4,7 @@ const jwt = require("jsonwebtoken");
 const expressJwt = require("express-jwt");
 
 router.post("/login", (req, res) => {
-  console.log(req.body);
   const { username, password } = req.body;
-  console.log(process.env.API_USERNAME);
 
   if (
     password == process.env.API_PASSWORD &&
@@ -27,7 +25,7 @@ router.post("/login", (req, res) => {
 });
 
 router.get("/validate", expressJwt({ secret: process.env.JWT_SECRET, algorithms: ["HS256"] }), (req, res) => {
-  res.status(200).send("valid token");
+  res.send({ status: "valid token" });
 });
 
 router.use(function (err, req, res, next) {

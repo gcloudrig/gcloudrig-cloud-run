@@ -11,11 +11,12 @@ export class JwtGuard implements CanActivate {
 
   constructor(private auth: AuthService, private router: Router) {}
 
-  canActivate(
+  async canActivate(
     route: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
+    state: RouterStateSnapshot): Promise<boolean> {
 
-      if (this.auth.isLoggedIn()) {
+      const isLoggedIn = await this.auth.isLoggedIn();
+      if (isLoggedIn) {
         console.log("jessica");
         
         return true;
