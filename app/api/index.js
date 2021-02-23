@@ -13,7 +13,7 @@ const socketioJwt = require("socketio-jwt");
 
 const io = require("socket.io")(server, {
   cors: {
-    origin: "*:*",
+    origins: "*",
     methods: ["GET", "POST"]
   }
 });
