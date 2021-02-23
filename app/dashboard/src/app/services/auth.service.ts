@@ -1,6 +1,6 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { tap } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 
 export interface Bearer {
   accessToken: string;
@@ -14,6 +14,7 @@ export class AuthService {
   constructor(private http: HttpClient) {}
 
   login(username: string, password: string) {
+
     return this.http
       .post<Bearer>('http://localhost:5000/v1/auth/login', { username: username, password: password })
       .pipe(
@@ -33,21 +34,27 @@ export class AuthService {
     return localStorage.getItem('auth_token');
   }
 
-  public async isLoggedIn() {
+  public isLoggedIn() {
     if (
       localStorage.getItem('auth_token') != null &&
       localStorage.getItem('auth_token') != ''
     ) {
-      const data = await this.http.get('http://localhost:5000/v1/auth/validate').toPromise();
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  isValidToken() {
+    this.http.get('http://localhost:5000/v1/auth/validate').pipe(map(data => {
       console.log(data);
+      (data);
       if (data == 'valid token') {
         return true;
       } else {
         return false;
       }
-    } else {
-      return false;
-    }
+    }));
   }
 
   public isLoggedOut() {

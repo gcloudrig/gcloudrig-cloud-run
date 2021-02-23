@@ -1,6 +1,9 @@
 <div class="text-center">
   <main class="form-signin">
     <img class="mb-4" src="assets/img/cloud.png" alt="" height="57" />
+    <div class="alert alert-danger" role="alert" *ngIf="loginFailed">
+      Login failed...
+    </div>
     <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
     <form [formGroup]="form">
       <fieldset>

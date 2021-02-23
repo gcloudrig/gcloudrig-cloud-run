@@ -16,8 +16,12 @@ export class JwtGuard implements CanActivate {
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
 
       if (this.auth.isLoggedIn()) {
+        console.log("jessica");
+        
         return true;
       } else {
+        console.log('yo');
+        
         this.router.navigate(['/login']);
         return false;
       }
