@@ -17,12 +17,12 @@ const io = require("socket.io")(server, {
     methods: ["GET", "POST"]
   }
 });
-// io.use(
-//   socketioJwt.authorize({
-//     secret: process.env.JWT_SECRET,
-//     handshake: true,
-//   })
-// );
+io.use(
+  socketioJwt.authorize({
+    secret: process.env.JWT_SECRET,
+    handshake: true,
+  })
+);
 
 app.set('socketio', io);
 

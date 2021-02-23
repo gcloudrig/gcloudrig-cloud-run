@@ -25,4 +25,14 @@ router.post("/login", (req, res) => {
   }
 });
 
+router.get("/validate", expressJwt({ secret: process.env.JWT_SECRET, algorithms: ["HS256"] }), (req, res) => {
+  res.status(200).send('valid token');
+});
+
+router.use(function (err, req, res, next) {
+  if (err.name === "UnauthorizedError") {
+    res.status(401).send("invalid token");
+  }
+});
+
 module.exports = router;

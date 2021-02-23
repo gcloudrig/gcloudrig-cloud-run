@@ -29,18 +29,28 @@ export class AuthService {
     localStorage.removeItem('auth_token');
   }
 
-  public isLoggedIn() {
+  getToken() {
+    return localStorage.getItem('auth_token');
+  }
+
+  public async isLoggedIn() {
     if (
       localStorage.getItem('auth_token') != null &&
       localStorage.getItem('auth_token') != ''
     ) {
-      return true;
+      const data = await this.http.get('http://localhost:5000/v1/auth/validate').toPromise();
+      console.log(data);
+      if (data == 'valid token') {
+        return true;
+      } else {
+        return false;
+      }
     } else {
       return false;
     }
   }
 
-  isLoggedOut() {
+  public isLoggedOut() {
     return !this.isLoggedIn();
   }
 }

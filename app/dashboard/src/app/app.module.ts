@@ -9,6 +9,7 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { LogitemComponent } from './components/logitem/logitem.component';
 import { ConsoleComponent } from './console/console.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 export function tokenGetter() {
   return localStorage.getItem("access_token");
@@ -19,7 +20,8 @@ export function tokenGetter() {
     AppComponent,
     LoginComponent,
     LogitemComponent,
-    ConsoleComponent
+    ConsoleComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,

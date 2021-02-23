@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { map, share } from 'rxjs/operators';
 import { from, Observable } from "rxjs";
 import {io} from 'socket.io-client';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-console',
@@ -9,7 +10,7 @@ import {io} from 'socket.io-client';
   styleUrls: ['./console.component.css'],
 })
 export class ConsoleComponent implements OnInit {
-  constructor() {}
+  constructor(private auth: AuthService) {}
 
   socket: any;
   processData: string[] = [];
@@ -17,14 +18,15 @@ export class ConsoleComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.socket = io('http://localhost:5000');
+    this.socket = io('http://localhost:5000', {
+      extraHeaders: { Authorization: `Bearer ${this.auth.getToken}` }
+    });
 
     this.fromEvent('process_data').subscribe(data => {
       this.processData.push(data);
     });
 
     this.command = this.fromEvent('command');
-
   }
 
   fromEvent(event: string): Observable<string> {
