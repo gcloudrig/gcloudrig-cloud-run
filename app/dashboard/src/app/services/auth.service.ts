@@ -1,9 +1,14 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { tap } from 'rxjs/operators';
+import { HttpHeaders } from '@angular/common/http';
 
 export interface Bearer {
   accessToken: string;
+}
+
+export interface Validity {
+  status: boolean;
 }
 
 @Injectable({
@@ -14,8 +19,9 @@ export class AuthService {
   constructor(private http: HttpClient) {}
 
   login(username: string, password: string) {
+
     return this.http
-      .post<Bearer>('http://localhost:5000/v1/auth/login', { username: username, password: password })
+      .post<Bearer>('/v1/auth/login', { username: username, password: password })
       .pipe(
         tap(data => this.setSession(data.accessToken))
       );
@@ -29,18 +35,30 @@ export class AuthService {
     localStorage.removeItem('auth_token');
   }
 
-  public isLoggedIn() {
+  getToken() {
+    return localStorage.getItem('auth_token');
+  }
+
+  public async isLoggedIn(): Promise<boolean> {
+    
     if (
       localStorage.getItem('auth_token') != null &&
       localStorage.getItem('auth_token') != ''
     ) {
-      return true;
+
+      const res = await this.http.get<Validity>('/v1/auth/validate', {
+        headers: new HttpHeaders({
+          Authorization: `Bearer ${this.getToken()}`
+        })
+      }).toPromise();
+      return res.status;
+      
     } else {
       return false;
     }
   }
 
-  isLoggedOut() {
+  public isLoggedOut() {
     return !this.isLoggedIn();
   }
 }

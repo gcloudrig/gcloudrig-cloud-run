@@ -14,6 +14,7 @@ RUN mkdir -p /usr/local/gcloud \
 ENV PATH $PATH:/usr/local/gcloud/google-cloud-sdk/bin
 
 # Get tagged copy of gcloudrig
+RUN mkdir /usr/src/app
 RUN curl -L https://api.github.com/repos/gcloudrig/gcloudrig/tarball/v0.1.0-beta.3 > /tmp/gcloudrig.tar.gz \
     && tar -C /usr/src/app -xvf /tmp/gcloudrig.tar.gz --strip-components=1
 
