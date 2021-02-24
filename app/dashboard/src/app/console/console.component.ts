@@ -19,7 +19,7 @@ export class ConsoleComponent implements OnInit {
   ngOnInit(): void {
 
     this.socket = io({
-      extraHeaders: { Authorization: `Bearer ${this.auth.getToken}` }
+      extraHeaders: { Authorization: `Bearer ${this.auth.getToken()}` }
     });
 
     this.fromEvent('process_data').subscribe(data => {
