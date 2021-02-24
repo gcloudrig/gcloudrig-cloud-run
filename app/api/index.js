@@ -23,19 +23,20 @@ io.use(
     handshake: true,
   })
 );
-
 app.set('socketio', io);
 
 app.use(cors());
-app.use(express.static(__dirname + '/../dashboard/dist/dashboard'));
+//app.use(express.static(__dirname + '/../dashboard/dist/dashboard'));
 app.use(bodyParser.json());
-
-// app.get("/", async (req, res) => {
-//   // TODO: send angular app in a nicer way tan this
-// });
 
 app.use("/v1/run", commandRoutes);
 app.use("/v1/auth", authRoutes);
+
+app.get('*.*', express.static(`${__dirname}/../dashboard/dist/dashboard`));
+
+app.all('*', function (req, res) {
+    res.status(200).sendFile(`/`, {root: `${__dirname}/../dashboard/dist/dashboard`});
+});
 
 server.listen(PORT, HOST);
 console.log(`Running on http://${HOST}:${PORT}`);
