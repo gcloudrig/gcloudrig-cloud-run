@@ -37,7 +37,7 @@ router.post("/region", (req, res) => {
 
 //get status
 router.get("/status", (req, res) => {
-  runCommand("./test.sh", req.app.get("socketio"));
+  runCommand(`${__dirname}/../../test.sh`, req.app.get("socketio"));
   res.sendStatus(200);
 });
 
