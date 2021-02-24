@@ -26,7 +26,6 @@ io.use(
 app.set('socketio', io);
 
 app.use(cors());
-//app.use(express.static(__dirname + '/../dashboard/dist/dashboard'));
 app.use(bodyParser.json());
 
 app.use("/v1/run", commandRoutes);
