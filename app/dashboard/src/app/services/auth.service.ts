@@ -46,14 +46,11 @@ export class AuthService {
       localStorage.getItem('auth_token') != ''
     ) {
 
-      const httpOptions = {
+      const res = await this.http.get<Validity>('/v1/auth/validate', {
         headers: new HttpHeaders({
-          'Content-Type':  'application/json',
           Authorization: `Bearer ${this.getToken()}`
         })
-      };
-
-      const res = await this.http.get<Validity>('/v1/auth/validate', httpOptions).toPromise();
+      }).toPromise();
       return res.status;
       
     } else {

@@ -19,31 +19,30 @@ router.use(
 router.use(isCommandRunning); //Make sure no other commands are running
 
 //scale up instance
-router.post("/up", (req, res) => {
+router.get("/up", (req, res) => {
   //runCommand("../scale-up.sh", req.app.get("socketio"));
   res.sendStatus(200);
 });
 
 //scale down instance
-router.post("/down", (req, res) => {
+router.get("/down", (req, res) => {
   //runCommand("../scale-down.sh", req.app.get("socketio"));
   res.sendStatus(200);
 });
 
 //change region
 router.post("/region", (req, res) => {
-  runCommand("./test.sh", req.app.get("socketio"));
   res.sendStatus(200);
 });
 
 //get status
-router.post("/status", (req, res) => {
-  req.app.get("socketio").sockets.emit("process_data", 'test1234');
+router.get("/status", (req, res) => {
+  runCommand("./test.sh", req.app.get("socketio"));
   res.sendStatus(200);
 });
 
 //nuke and run
-router.post("/destroy", (req, res) => {
+router.get("/destroy", (req, res) => {
   res.sendStatus(200);
 });
 

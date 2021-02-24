@@ -3,6 +3,7 @@ import { map, share } from 'rxjs/operators';
 import { from, Observable } from "rxjs";
 import {io} from 'socket.io-client';
 import { AuthService } from '../services/auth.service';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Component({
   selector: 'app-console',
@@ -10,7 +11,7 @@ import { AuthService } from '../services/auth.service';
   styleUrls: ['./console.component.css'],
 })
 export class ConsoleComponent implements OnInit {
-  constructor(private auth: AuthService) {}
+  constructor(private auth: AuthService, private http: HttpClient) {}
 
   socket: any;
   processData: string[] = [];
@@ -29,6 +30,14 @@ export class ConsoleComponent implements OnInit {
     });
 
     this.command = this.fromEvent('command');
+  }
+
+  test() {
+    this.http.get('/v1/run/status', {
+      headers: new HttpHeaders({
+        'Authorization': `Bearer ${this.auth.getToken()}`
+      })
+    }).subscribe(data => console.log(data), error => console.log(error));
   }
 
   fromEvent(event: string): Observable<string> {
