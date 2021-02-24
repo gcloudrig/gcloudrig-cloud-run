@@ -18,12 +18,14 @@ export class ConsoleComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.socket = io('/gcloudrig/socket.io', {
+    this.socket = io({
       extraHeaders: { Authorization: `Bearer ${this.auth.getToken}` }
     });
 
     this.fromEvent('process_data').subscribe(data => {
       this.processData.push(data);
+      console.log(data);
+      
     });
 
     this.command = this.fromEvent('command');

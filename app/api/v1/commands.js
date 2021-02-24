@@ -32,7 +32,7 @@ router.post("/down", (req, res) => {
 
 //change region
 router.post("/region", (req, res) => {
-  runCommand("../test.sh", req.app.get("socketio"));
+  runCommand("./test.sh", req.app.get("socketio"));
   res.sendStatus(200);
 });
 
