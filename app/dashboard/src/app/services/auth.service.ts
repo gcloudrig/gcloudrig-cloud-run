@@ -21,7 +21,7 @@ export class AuthService {
   login(username: string, password: string) {
 
     return this.http
-      .post<Bearer>('http://localhost:5000/v1/auth/login', { username: username, password: password })
+      .post<Bearer>('/v1/auth/login', { username: username, password: password })
       .pipe(
         tap(data => this.setSession(data.accessToken))
       );
@@ -53,7 +53,7 @@ export class AuthService {
         })
       };
 
-      const res = await this.http.get<Validity>('http://localhost:5000/v1/auth/validate', httpOptions).toPromise();
+      const res = await this.http.get<Validity>('/v1/auth/validate', httpOptions).toPromise();
       return res.status;
       
     } else {

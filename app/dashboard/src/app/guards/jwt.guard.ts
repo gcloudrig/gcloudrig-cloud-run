@@ -17,16 +17,11 @@ export class JwtGuard implements CanActivate {
 
       const isLoggedIn = await this.auth.isLoggedIn();
       if (isLoggedIn) {
-        console.log("jessica");
-        
         return true;
       } else {
-        console.log('yo');
-        
         this.router.navigate(['/login']);
         return false;
       }
-
 
   }
   

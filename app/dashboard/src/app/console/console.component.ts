@@ -18,7 +18,7 @@ export class ConsoleComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.socket = io('http://localhost:5000', {
+    this.socket = io('/gcloudrig/socket.io', {
       extraHeaders: { Authorization: `Bearer ${this.auth.getToken}` }
     });
 
