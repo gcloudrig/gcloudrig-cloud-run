@@ -17,11 +17,7 @@ ENV PATH $PATH:/usr/local/gcloud/google-cloud-sdk/bin
 RUN mkdir /usr/src/app
 RUN curl -L https://api.github.com/repos/gcloudrig/gcloudrig/tarball/v0.1.0-beta.3 > /tmp/gcloudrig.tar.gz \
     && tar -C /usr/src/app -xvf /tmp/gcloudrig.tar.gz --strip-components=1
-
-# Build-time arg for project_id
-ARG project_id 
-ENV PROJECT_ID=$project_id
-
+    
 COPY ./entrypoint.sh /
 COPY ./app /usr/src/app/
 
