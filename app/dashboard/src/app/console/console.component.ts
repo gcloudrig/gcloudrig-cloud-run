@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { map, share } from 'rxjs/operators';
-import { from, Observable } from "rxjs";
+import { Observable } from "rxjs";
 import {io} from 'socket.io-client';
 import { AuthService } from '../services/auth.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
@@ -30,14 +29,6 @@ export class ConsoleComponent implements OnInit {
     });
 
     this.command = this.fromEvent('command');
-  }
-
-  test() {
-    this.http.get('/v1/run/status', {
-      headers: new HttpHeaders({
-        'Authorization': `Bearer ${this.auth.getToken()}`
-      })
-    }).subscribe(data => console.log(data), error => console.log(error));
   }
 
   fromEvent(event: string): Observable<string> {

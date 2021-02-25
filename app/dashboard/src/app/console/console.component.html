@@ -1,13 +1,6 @@
-<div class="container-fluid">
-    <div class="row">
-        <div class="col log">
-            <h2 class="command">{{command | async}}</h2>
-            <ng-container *ngFor="let data of processData">
-                <app-logitem [item]=data></app-logitem>
-            </ng-container>
-        </div>
-        <div class="col">
-            <button class="btn btn-primary" (click)="test()">Test socket</button>
-        </div>
-    </div>
+<div class="log">
+    <h2 class="command">{{command | async}}</h2>
+    <ng-container *ngFor="let data of processData">
+        <app-logitem [item]=data></app-logitem>
+    </ng-container>
 </div>
