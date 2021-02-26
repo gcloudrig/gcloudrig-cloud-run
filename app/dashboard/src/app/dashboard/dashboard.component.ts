@@ -14,8 +14,24 @@ export class DashboardComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  test() {
+  status() {
     this.http.get('/v1/run/status', {
+      headers: new HttpHeaders({
+        'Authorization': `Bearer ${this.auth.getToken()}`
+      })
+    }).subscribe(data => console.log(data), error => console.log(error));
+  }
+
+  scaleUp() {
+    this.http.get('/v1/run/up', {
+      headers: new HttpHeaders({
+        'Authorization': `Bearer ${this.auth.getToken()}`
+      })
+    }).subscribe(data => console.log(data), error => console.log(error));
+  }
+
+  scaleDown() {
+    this.http.get('/v1/run/down', {
       headers: new HttpHeaders({
         'Authorization': `Bearer ${this.auth.getToken()}`
       })

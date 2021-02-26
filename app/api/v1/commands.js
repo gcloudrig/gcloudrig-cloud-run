@@ -20,13 +20,13 @@ router.use(isCommandRunning); //Make sure no other commands are running
 
 //scale up instance
 router.get("/up", (req, res) => {
-  //runCommand("../scale-up.sh", req.app.get("socketio"));
+  runCommand(`${__dirname}/../../scale-up.sh`, req.app.get("socketio"));
   res.sendStatus(200);
 });
 
 //scale down instance
 router.get("/down", (req, res) => {
-  //runCommand("../scale-down.sh", req.app.get("socketio"));
+  runCommand(`${__dirname}/../../scale-down.sh`, req.app.get("socketio"));
   res.sendStatus(200);
 });
 
@@ -37,7 +37,7 @@ router.post("/region", (req, res) => {
 
 //get status
 router.get("/status", (req, res) => {
-  runCommand(`${__dirname}/../../test.sh`, req.app.get("socketio"));
+  runCommand(`${__dirname}/../../status.sh`, req.app.get("socketio"));
   res.sendStatus(200);
 });
 
