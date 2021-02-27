@@ -25,5 +25,4 @@ WORKDIR /usr/src/app
 RUN npm ci --prefix ./api --only=production; \
     npm ci --prefix ./dashboard --only=production
 
-EXPOSE 5000/tcp
 CMD [ "sh", "-c", "/entrypoint.sh" ]
