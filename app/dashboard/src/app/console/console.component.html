@@ -1,6 +1,6 @@
 <div class="log">
-    <h2 class="command">{{command | async}}</h2>
+    <h2 class="command">$ {{command}}</h2>
     <ng-container *ngFor="let data of processData">
-        <app-logitem [item]=data></app-logitem>
+        <app-logitem [item]=data.msg [type]=data.type></app-logitem>
     </ng-container>
 </div>

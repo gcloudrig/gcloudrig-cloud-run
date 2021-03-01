@@ -38,4 +38,13 @@ export class DashboardComponent implements OnInit {
     }).subscribe(data => console.log(data), error => console.log(error));
   }
 
+
+  test() {
+    this.http.get('/v1/run/test', {
+      headers: new HttpHeaders({
+        'Authorization': `Bearer ${this.auth.getToken()}`
+      })
+    }).subscribe(data => console.log(data), error => console.log(error));
+  }
+
 }

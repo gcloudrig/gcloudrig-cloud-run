@@ -2,3 +2,6 @@
 app/api/node_modules/
 app/dashboard/node_modules/
 service_account.json
+README.md
+Makefile
+service_account.sh
