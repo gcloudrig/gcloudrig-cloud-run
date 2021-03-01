@@ -56,6 +56,9 @@ export class ConsoleComponent implements OnInit {
 
   clearConsole() {
     localStorage.setItem('last_console', '');
+    localStorage.setItem('last_command', '');
+    this.processData = [];
+    this.command = '';
   }
 
   fromEvent(event: string): Observable<string> {
