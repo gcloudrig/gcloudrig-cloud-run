@@ -21,8 +21,12 @@ export class ConsoleComponent implements OnInit {
   socket: any;
   processData: LogItems = [];
   command: any;
+  myDate: any;
 
   ngOnInit(): void {
+    
+    this.processData = JSON.parse(localStorage.getItem('last_console') || '[]');
+    this.command = localStorage.getItem('last_command') || '';    
 
     this.socket = io({
       extraHeaders: { Authorization: `Bearer ${this.auth.getToken()}` }
@@ -30,16 +34,28 @@ export class ConsoleComponent implements OnInit {
 
     this.fromEvent('process_data').subscribe(data => {
       this.processData.push({msg: data, type: 'log'});
+      this.saveConsole();
     });
 
     this.fromEvent('command').subscribe(data => {
       this.processData = [{msg: 'Command Start', type: 'success'}];
       this.command = data;
+      this.saveConsole();
     });
 
     this.fromEvent('command_exit').subscribe(data => {
       this.processData.push({msg: 'Command Complete', type: 'danger'});
+      this.saveConsole();
     });
+  }
+
+  saveConsole() {
+    localStorage.setItem('last_console', JSON.stringify(this.processData));
+    localStorage.setItem('last_command', this.command);
+  }
+
+  clearConsole() {
+    localStorage.setItem('last_console', '');
   }
 
   fromEvent(event: string): Observable<string> {
