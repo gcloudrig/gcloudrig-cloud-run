@@ -1,6 +1,6 @@
 build:
 	npm run build --prefix app/dashboard
-	docker build --build-arg --tag gcloudrigapi .
+	docker build --tag gcloudrigapi .
 
 deploy:
 	gcloud builds submit --tag gcr.io/${GOOGLE_CLOUD_PROJECT}/gcloudrig

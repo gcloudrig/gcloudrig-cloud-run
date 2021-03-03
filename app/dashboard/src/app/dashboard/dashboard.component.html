@@ -5,6 +5,9 @@
             <app-console></app-console>
         </div>
         <div class="col">
+            <div class="alert alert-danger" role="alert" *ngIf="errorMsg">
+                {{errorMsg}}
+            </div>
             <button class="btn btn-primary ml-2" (click)="status()">Status</button>
             <button class="btn btn-primary ml-2" (click)="scaleUp()">Scale Up</button>
             <button class="btn btn-primary ml-2" (click)="scaleDown()">Scale Down</button>

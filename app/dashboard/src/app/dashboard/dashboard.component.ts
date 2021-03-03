@@ -9,6 +9,8 @@ import { AuthService } from '../services/auth.service';
 })
 export class DashboardComponent implements OnInit {
 
+  errorMsg = '';
+
   constructor(private http: HttpClient, private auth: AuthService) { }
 
   ngOnInit(): void {
@@ -19,7 +21,7 @@ export class DashboardComponent implements OnInit {
       headers: new HttpHeaders({
         'Authorization': `Bearer ${this.auth.getToken()}`
       })
-    }).subscribe(data => console.log(data), error => console.log(error));
+    }).subscribe(data => console.log(data), error => this.handelError(error.status));
   }
 
   scaleUp() {
@@ -27,7 +29,7 @@ export class DashboardComponent implements OnInit {
       headers: new HttpHeaders({
         'Authorization': `Bearer ${this.auth.getToken()}`
       })
-    }).subscribe(data => console.log(data), error => console.log(error));
+    }).subscribe(data => console.log(data), error => this.handelError(error.status));
   }
 
   scaleDown() {
@@ -35,16 +37,29 @@ export class DashboardComponent implements OnInit {
       headers: new HttpHeaders({
         'Authorization': `Bearer ${this.auth.getToken()}`
       })
-    }).subscribe(data => console.log(data), error => console.log(error));
+    }).subscribe(data => console.log(data), error => this.handelError(error.status));
   }
-
 
   test() {
     this.http.get('/v1/run/test', {
       headers: new HttpHeaders({
         'Authorization': `Bearer ${this.auth.getToken()}`
       })
-    }).subscribe(data => console.log(data), error => console.log(error));
+    }).subscribe(data => console.log(data), error => this.handelError(error.status));
   }
 
+  private handelError(status: number) {
+    if (status == 409) {
+      this.errorMsg = 'Command is already running...'
+      setTimeout(() => {
+        this.errorMsg = '';
+      }, 4000);
+    } else if(status != 200) {
+      this.errorMsg = 'An error occured...'
+      setTimeout(() => {
+        this.errorMsg = '';
+      }, 4000);
+    }
+  }
+  
 }
