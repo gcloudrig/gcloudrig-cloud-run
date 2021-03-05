@@ -7,12 +7,3 @@ sleep 1
 echo "test4"
 sleep 1
 echo "test5"
-sleep 1
-echo "test6"
-sleep 1
-echo "test7"
-sleep 1
-echo "test8"
-sleep 1
-echo "test9"
-sleep 1

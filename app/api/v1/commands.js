@@ -18,15 +18,21 @@ router.use(
 );
 router.use(isCommandRunning); //Make sure no other commands are running
 
+router.get("/test", (req, res) => {
+  runCommand(`${__dirname}/../../test.sh`, 'test.sh', req.app.get("socketio"));
+  res.sendStatus(200);
+});
+
+
 //scale up instance
 router.get("/up", (req, res) => {
-  //runCommand("../scale-up.sh", req.app.get("socketio"));
+  runCommand(`${__dirname}/../../scale-up.sh`, 'scale-up.sh', req.app.get("socketio"));
   res.sendStatus(200);
 });
 
 //scale down instance
 router.get("/down", (req, res) => {
-  //runCommand("../scale-down.sh", req.app.get("socketio"));
+  runCommand(`${__dirname}/../../scale-down.sh`, 'scale-down.sh', req.app.get("socketio"));
   res.sendStatus(200);
 });
 
@@ -37,7 +43,7 @@ router.post("/region", (req, res) => {
 
 //get status
 router.get("/status", (req, res) => {
-  runCommand(`${__dirname}/../../test.sh`, req.app.get("socketio"));
+  runCommand(`${__dirname}/../../status.sh`, 'status.sh', req.app.get("socketio"));
   res.sendStatus(200);
 });
 
@@ -52,10 +58,8 @@ router.use(function (err, req, res, next) {
   }
 });
 
-function runCommand(command, io) {
+function runCommand(command, commandToSend, io) {
 
-  var commandToSend = command.replace('..', '');
-  commandToSend = commandToSend.replace('/', '');
   io.sockets.emit("command", commandToSend);
 
   processingCommand = true;
@@ -76,6 +80,7 @@ function runCommand(command, io) {
   myProcess.on("exit", () => {
     processingCommand = false;
     console.log("command complete");
+    io.sockets.emit("command_exit", "command complete");
   });
 }
 

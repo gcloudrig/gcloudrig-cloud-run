@@ -9,10 +9,7 @@ import { LoginComponent } from './login/login.component';
 import { LogitemComponent } from './components/logitem/logitem.component';
 import { ConsoleComponent } from './console/console.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
-
-export function tokenGetter() {
-  return localStorage.getItem("auth_token");
-}
+import { NavComponent } from './nav/nav.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +17,8 @@ export function tokenGetter() {
     LoginComponent,
     LogitemComponent,
     ConsoleComponent,
-    DashboardComponent
+    DashboardComponent,
+    NavComponent
   ],
   imports: [
     BrowserModule,
