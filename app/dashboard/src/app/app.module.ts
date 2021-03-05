@@ -11,10 +11,6 @@ import { ConsoleComponent } from './console/console.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { NavComponent } from './nav/nav.component';
 
-export function tokenGetter() {
-  return localStorage.getItem("auth_token");
-}
-
 @NgModule({
   declarations: [
     AppComponent,

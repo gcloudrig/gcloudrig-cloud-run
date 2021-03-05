@@ -2,6 +2,12 @@ build:
 	npm run build --prefix app/dashboard
 	docker build --tag gcloudrigapi .
 
+env:
+	export JWT_SECRET=testing1234
+	export API_USERNAME=test
+	export API_PASSWORD=password123
+	export PORT=5000
+
 deploy:
 	gcloud builds submit --tag gcr.io/${GOOGLE_CLOUD_PROJECT}/gcloudrig
 	gcloud run deploy --image gcr.io/${GOOGLE_CLOUD_PROJECT}/gcloudrig --service-account gcloudrigkey@${GOOGLE_CLOUD_PROJECT}.iam.gserviceaccount.com --platform managed --update-env-vars JWT_SECRET=testing1234,API_USERNAME=test,API_PASSWORD=password123,PROJECT_ID=${GOOGLE_CLOUD_PROJECT}
