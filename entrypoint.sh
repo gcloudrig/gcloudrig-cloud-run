@@ -7,10 +7,10 @@ set -e
 if [ -n "$SERVICE_ACCOUNT_KEY_BASE64" ]; then
     export GOOGLE_APPLICATION_CREDENTIALS="/root/.config/gcloud/application_default_credentials.json"
     echo "$SERVICE_ACCOUNT_KEY_BASE64" | base64 -d > "$GOOGLE_APPLICATION_CREDENTIALS"
+    gcloud auth activate-service-account --key-file=$GOOGLE_APPLICATION_CREDENTIALS
 fi
 
-# activate service account and set project id
-gcloud auth activate-service-account --key-file="$GOOGLE_APPLICATION_CREDENTIALS"
+# set project id
 gcloud config set project "$PROJECT_ID"
 
 # run api

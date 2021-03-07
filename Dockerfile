@@ -23,6 +23,9 @@ COPY ./app /usr/src/app/
 
 WORKDIR /usr/src/app
 RUN npm ci --prefix ./api --only=production; \
-    npm ci --prefix ./dashboard --only=production
+    npm install --prefix ./dashboard
+
+RUN npm install -g @angular/cli@latest
+RUN npm run build --prefix ./dashboard
 
 CMD [ "sh", "-c", "/entrypoint.sh" ]

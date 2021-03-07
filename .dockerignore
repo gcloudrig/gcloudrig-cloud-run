@@ -1,6 +1,7 @@
 .git
 app/api/node_modules/
 app/dashboard/node_modules/
+app/dashboard/dist
 service_account.json
 README.md
 Makefile
