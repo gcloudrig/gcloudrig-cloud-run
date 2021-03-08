@@ -1,0 +1,23 @@
+{
+    "name": "gclourig-dashboard",
+    "env": {
+        "API_PASSWORD": {
+            "description": "Pick a password for your dashboard. Do not forget this!",
+            "required": true
+        },
+        "API_USERNAME": {
+            "description": "Pick a username for your dashboard. Do not forget this!",
+            "required": true
+        },
+        "JWT_SECRET": {
+            "description": "A random secret to sign JWT tokens. You do not need to remember this.",
+            "required": true,
+            "generator": "secret"
+        }
+    },
+    "options": {
+        "allow-unauthenticated": true,
+        "memory": "512Mi",
+        "cpu": "1"
+    }
+}
