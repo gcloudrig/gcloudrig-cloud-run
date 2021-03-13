@@ -23,6 +23,8 @@ export class ConsoleComponent implements OnInit {
 
   ngOnInit(): void {
     
+    this.socket.connect();
+
     this.processData = JSON.parse(localStorage.getItem('last_console') || '[]');
     this.command = localStorage.getItem('last_command') || '';    
 

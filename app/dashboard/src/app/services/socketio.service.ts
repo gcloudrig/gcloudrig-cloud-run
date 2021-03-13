@@ -25,6 +25,12 @@ export class SocketioService {
     });
   }
 
+  reconnect() {
+    if (!this.isConnected) {
+      this.connect();
+    }
+  }
+
   fromEvent(event: string): Observable<string> {
     return new Observable<string>((subscriber) => { 
       this.socket.on(event, (data: string) => {
