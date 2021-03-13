@@ -1,12 +1,14 @@
 <app-nav></app-nav>
 <div class="container mt-4">
-  <div class="jumbotron">
-    <h4 class="display-4">Gcloudrig Commands</h4>
-    <p class="lead">Select buttons below to control your gcloudrig. Output from the scripts will show up in the console below.</p>
+  <h3 class="mb-3">Commands:</h3>
 
-    <button class="btn btn-primary" (click)="status()">Status</button>
-    <button class="btn btn-primary ml-2" (click)="scaleUp()">Scale Up</button>
-    <button class="btn btn-primary ml-2" (click)="scaleDown()">Scale Down</button>
+  <div class="row mb-4">
+    <button class="col btn btn-outline-success ml-3" (click)="scaleUp()">Scale Up</button>
+      <button class="col btn btn-outline-secondary ml-3" (click)="status()">Status</button>
+      <button class="col btn btn-outline-danger ml-3 mr-3" (click)="scaleDown()">
+        Scale Down
+      </button>
+
   </div>
 
   <div class="alert alert-danger" role="alert" *ngIf="errorMsg">
