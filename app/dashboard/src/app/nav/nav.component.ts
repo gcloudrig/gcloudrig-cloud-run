@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 
 @Component({
-  selector: 'app-nav',
+  selector: 'app-naver',
   templateUrl: './nav.component.html',
   styleUrls: ['./nav.component.css']
 })
